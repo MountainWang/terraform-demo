@@ -1,0 +1,4 @@
+实现了一个pipeline，可以实现当特定包上传到s3 bucket后触发pipeline自动部署到指定auto scaling group。部署到EC2 instance也可以实现，通过tag来进行筛选，并没有包含在代码中。
+pipeline需要的所有资源，除一个名为“aws_testing”的ssh key以外均已包含在main.tf中。要部署的demo app存放在 code目录中，将code.zip上传到mtw-terraform-source-bucket中即可。
+asg启动后自动触发deploy也已经实现，因为中间有尝试给pipeline加hook，不确定是hook的作用还是aws的默认行为。经过多次destory再apply的实验，可以确认是aws的默认行为。
+demo app的行为是touch ~/helloworld，然后向我的手机推送一条通知。之前没有接触过codePipeline和terraform，完成这个demo耗时在4到5小时左右，不包括配置aws cli和安装terraform。
